@@ -11,6 +11,7 @@ class Vector
 public:
 
 	Vector() = default;
+
 	Vector(unsigned int size)
 		: m_size{ size }
 		, m_capacity{ m_size }
@@ -19,9 +20,7 @@ public:
 	}
 
 	Vector(unsigned int size, const T& value)
-		: m_size{ size }
-		, m_capacity{ m_size }
-		, m_data{ new T[m_capacity] }
+		: Vector(size)
 	{
 		for (unsigned int i = 0; i < m_size; ++i)
 		{
