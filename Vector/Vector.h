@@ -50,6 +50,11 @@ public:
 		return m_capacity;
 	}
 
+	void clear()
+	{
+		// TODO - Clears the contents of the container. The capacity remains unchanged.
+	}
+
 	bool empty() const noexcept
 	{
 		return m_size == 0;
@@ -59,8 +64,18 @@ public:
 	{
 	}
 
-	void insert(unsigned int index, const T& value)
+	const T& front() const
 	{
+		return *m_data;
+	}
+
+	const T& back() const
+	{
+		return m_data[m_size - 1];
+	}
+
+	void insert(unsigned int index, const T& value)
+	{	
 	}
 
 	void insert_end(const T& value)
