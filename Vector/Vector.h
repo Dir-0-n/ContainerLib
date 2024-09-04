@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstring>
+
 template <class T>
 class Vector
 {
@@ -14,8 +16,8 @@ public:
 
 	Vector(unsigned int size)
 		: m_size{ size }
-		, m_capacity{ m_size }
-		, m_data{ new T[m_capacity] }
+		, m_capacity{ size }
+		, m_data{ new T[m_capacity]{} }
 	{
 	}
 
@@ -43,25 +45,45 @@ public:
 		return m_data[index];
 	}
 
-	unsigned int Capacity() const
+	unsigned int capacity() const noexcept
 	{
 		return m_capacity;
 	}
 
-	bool Empty() const
+	bool empty() const noexcept
 	{
 		return m_size == 0;
 	}
 
-	void Erase(unsigned int index)
+	void erase(unsigned int index)
 	{
 	}
 
-	void Insert(unsigned int index, const T& value)
+	void insert(unsigned int index, const T& value)
 	{
 	}
 
-	unsigned int Size() const
+	void insert_end(const T& value)
+	{
+		if (m_size >= m_capacity)
+		{
+			// growth factor = 2
+			reserve(2 * m_capacity);
+		}
+
+		m_data[m_size++] = value;
+	}
+
+	void reserve(unsigned int newCapacity)
+	{
+		T* tmp = new T[newCapacity]{};
+		memcpy(tmp, m_data, sizeof(T) * m_size);
+		delete[] m_data;
+		m_data = tmp;
+		m_capacity = newCapacity;
+	}
+
+	unsigned int size() const noexcept
 	{
 		return m_size;
 	}
