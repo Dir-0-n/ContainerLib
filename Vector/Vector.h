@@ -74,8 +74,24 @@ public:
 		return m_data[m_size - 1];
 	}
 
-	void insert(unsigned int index, const T& value)
-	{	
+	void insert(const unsigned int index, const T& value)
+	{
+		if (index > capacity)
+		{
+			return;
+		}
+
+		if (m_size == m_capacity)
+		{
+			reserve(2 * m_capacity);
+		}
+
+		for (int i = size; i > index; --i)
+		{
+			m_data[i] = m_data[i - 1];
+		}
+
+		m_data[index] = value;
 	}
 
 	void insert_end(const T& value)
